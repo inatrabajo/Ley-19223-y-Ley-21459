@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ciberdelitos Chile — Guía de Estudio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#0a0a0f;--surface:#111118;--surface2:#1a1a24;
+    --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.14);
+    --accent:#6C63FF;--accent2:#FF6B6B;--accent3:#00D9A3;
+    --text:#f0f0f5;--muted:#888899;
+    --mono:'DM Mono',monospace;--sans:'DM Sans',sans-serif;--display:'Syne',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;overflow-x:hidden;}
+  body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(108,99,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(108,99,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+  .container{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:2rem 1.5rem 5rem;}
+  header{text-align:center;padding:3rem 0 2.5rem;border-bottom:0.5px solid var(--border2);margin-bottom:2.5rem;}
+  .badge{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.12em;color:var(--accent3);border:0.5px solid var(--accent3);padding:4px 12px;border-radius:2px;margin-bottom:1.2rem;text-transform:uppercase;}
+  h1{font-family:var(--display);font-weight:800;font-size:clamp(2rem,5vw,3.2rem);line-height:1.05;letter-spacing:-0.02em;margin-bottom:.8rem;}
+  h1 .hl{color:var(--accent);}h1 .hl2{color:var(--accent3);}
+  .subtitle{color:var(--muted);font-size:15px;font-weight:300;max-width:480px;margin:0 auto;line-height:1.6;}
+  .tabs{display:flex;gap:6px;background:var(--surface);border:0.5px solid var(--border2);border-radius:10px;padding:6px;margin-bottom:2rem;flex-wrap:wrap;}
+  .tab{flex:1;min-width:88px;padding:10px 8px;border-radius:7px;border:none;background:transparent;color:var(--muted);font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;white-space:nowrap;text-align:center;}
+  .tab:hover{color:var(--text);background:var(--surface2);}
+  .tab.active{background:var(--accent);color:#fff;}
+  .section{display:none;animation:fadeUp .3s ease;}
+  .section.active{display:block;}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+  .card{background:var(--surface);border:0.5px solid var(--border2);border-radius:12px;padding:1.5rem;margin-bottom:1rem;}
+  .card p{font-size:14px;color:#ccccd8;line-height:1.75;margin-bottom:.5rem;}
+  .card ul{padding-left:1.3rem;}
+  .card li{font-size:14px;color:#ccccd8;line-height:1.7;margin-bottom:5px;}
+  .card strong{color:var(--text);}
+  .card h3{font-family:var(--display);font-weight:700;font-size:15px;margin:1rem 0 .5rem;color:var(--text);}
+  .card-title{font-family:var(--display);font-weight:700;font-size:16px;margin-bottom:.8rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .pill{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:3px;font-weight:500;}
+  .pill-purple{background:rgba(108,99,255,.18);color:var(--accent);}
+  .pill-green{background:rgba(0,217,163,.12);color:var(--accent3);}
+  .pill-red{background:rgba(255,107,107,.12);color:var(--accent2);}
+  .art-block{border-left:3px solid var(--accent);padding:1rem 1.2rem;margin:.8rem 0;background:rgba(108,99,255,.05);border-radius:0 8px 8px 0;}
+  .art-block.green{border-left-color:var(--accent3);background:rgba(0,217,163,.04);}
+  .art-block.amber{border-left-color:#f59e0b;background:rgba(245,158,11,.05);}
+  .art-num{font-family:var(--mono);font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;}
+  .art-num.green{color:var(--accent3);}
+  .art-num.amber{color:#f59e0b;}
+  .art-title{font-family:var(--display);font-weight:700;font-size:14px;margin-bottom:7px;}
+  .art-body{font-size:13px;color:#bbbbc8;line-height:1.75;}
+  .art-body strong{color:var(--text);}
+  .pena{display:inline-block;font-family:var(--mono);font-size:10px;padding:3px 9px;border-radius:3px;margin-top:8px;}
+  .pena-purple{background:rgba(108,99,255,.18);color:var(--accent);}
+  .pena-green{background:rgba(0,217,163,.12);color:var(--accent3);}
+  .pena-amber{background:rgba(245,158,11,.15);color:#f59e0b;}
+  .slabel{font-family:var(--mono);font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin:1.5rem 0 .7rem;display:block;}
+  .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+  .compare-col{background:var(--surface);border:0.5px solid var(--border2);border-radius:12px;overflow:hidden;}
+  .compare-header{padding:1rem 1.2rem;border-bottom:0.5px solid var(--border2);}
+  .compare-header .lnum{font-family:var(--mono);font-size:11px;font-weight:500;margin-bottom:4px;}
+  .compare-header h3{font-family:var(--display);font-size:15px;font-weight:700;margin:0;}
+  .col-19 .compare-header{border-left:3px solid var(--accent);}
+  .col-21 .compare-header{border-left:3px solid var(--accent3);}
+  .col-19 .lnum{color:var(--accent);}
+  .col-21 .lnum{color:var(--accent3);}
+  .compare-body{padding:1rem 1.2rem;}
+  .compare-row{display:flex;flex-direction:column;gap:3px;padding:8px 0;border-bottom:0.5px solid var(--border);}
+  .compare-row:last-child{border-bottom:none;}
+  .compare-row .label{font-size:11px;color:var(--muted);font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;}
+  .compare-row .value{font-size:13px;color:var(--text);}
+  .timeline{position:relative;padding-left:2rem;}
+  .timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:1px;background:var(--border2);}
+  .tl-item{position:relative;margin-bottom:1.5rem;}
+  .tl-dot{position:absolute;left:-24px;top:4px;width:10px;height:10px;border-radius:50%;border:2px solid var(--accent);background:var(--bg);}
+  .tl-dot.green{border-color:var(--accent3);}
+  .tl-date{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:4px;}
+  .tl-title{font-family:var(--display);font-weight:700;font-size:14px;margin-bottom:4px;}
+  .tl-desc{font-size:13px;color:#aaaabc;line-height:1.6;}
+  .quiz-progress{display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;}
+  .progress-bar{flex:1;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden;}
+  .progress-fill{height:100%;background:var(--accent);border-radius:2px;transition:width .4s ease;}
+  .progress-text{font-family:var(--mono);font-size:12px;color:var(--muted);min-width:60px;text-align:right;}
+  .quiz-card{background:var(--surface);border:0.5px solid var(--border2);border-radius:14px;padding:2rem;margin-bottom:1rem;}
+  .quiz-law-tag{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:1rem;display:flex;align-items:center;gap:8px;}
+  .quiz-law-tag .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+  .quiz-question{font-family:var(--display);font-size:17px;font-weight:700;line-height:1.45;margin-bottom:1.5rem;}
+  .options{display:flex;flex-direction:column;gap:10px;}
+  .option{padding:14px 18px;border-radius:10px;border:0.5px solid var(--border2);background:var(--surface2);color:var(--text);font-size:14px;cursor:pointer;transition:all .18s;text-align:left;font-family:var(--sans);line-height:1.5;}
+  .option:hover:not(:disabled){border-color:var(--accent);background:rgba(108,99,255,.08);}
+  .option.correct{border-color:var(--accent3);background:rgba(0,217,163,.1);color:var(--accent3);}
+  .option.wrong{border-color:var(--accent2);background:rgba(255,107,107,.1);color:var(--accent2);}
+  .option:disabled{cursor:default;}
+  .feedback{margin-top:1rem;padding:14px 18px;border-radius:10px;font-size:13px;line-height:1.7;display:none;}
+  .feedback.show{display:block;}
+  .feedback.ok{background:rgba(0,217,163,.1);border:0.5px solid rgba(0,217,163,.3);color:#a8f0dc;}
+  .feedback.ko{background:rgba(255,107,107,.1);border:0.5px solid rgba(255,107,107,.3);color:#f0b8b8;}
+  .quiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.2rem;}
+  .btn{padding:10px 22px;border-radius:8px;border:0.5px solid var(--border2);background:transparent;color:var(--text);font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;transition:all .18s;}
+  .btn:hover{background:var(--surface2);}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .btn.primary:hover{opacity:.88;}
+  .score-screen{text-align:center;padding:3rem 2rem;background:var(--surface);border:0.5px solid var(--border2);border-radius:14px;}
+  .score-num{font-family:var(--display);font-size:72px;font-weight:800;line-height:1;margin-bottom:.5rem;}
+  .score-label{color:var(--muted);font-size:15px;margin-bottom:2rem;}
+  .flashcard-wrap{perspective:1000px;margin-bottom:1.5rem;cursor:pointer;min-height:220px;}
+  .flashcard{width:100%;min-height:220px;position:relative;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,0,.2,1);}
+  .flashcard.flipped{transform:rotateY(180deg);}
+  .fc-front,.fc-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:2rem;border:0.5px solid var(--border2);text-align:center;min-height:220px;}
+  .fc-front{background:var(--surface);}
+  .fc-back{background:var(--surface2);transform:rotateY(180deg);}
+  .fc-hint{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:1rem;text-transform:uppercase;letter-spacing:.08em;}
+  .fc-term{font-family:var(--display);font-size:19px;font-weight:800;line-height:1.2;margin-bottom:.5rem;}
+  .fc-def{font-size:13px;color:#ccccdc;line-height:1.7;max-width:520px;}
+  .fc-nav{display:flex;justify-content:center;align-items:center;gap:16px;margin-top:1rem;}
+  .fc-counter{font-family:var(--mono);font-size:13px;color:var(--muted);min-width:60px;text-align:center;}
+  @media(max-width:600px){.compare-grid{grid-template-columns:1fr;}h1{font-size:1.8rem;}.quiz-question{font-size:15px;}.score-num{font-size:52px;}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="badge">Derecho Penal Digital · Chile</div>
+  <h1>Ley <span class="hl">19.223</span> & Ley <span class="hl2">21.459</span></h1>
+  <p class="subtitle">Estructura real y completa: 4 artículos (19.223) · 21 artículos permanentes (21.459) · 26 tarjetas · 30 preguntas.</p>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('resumen',this)">Resumen</button>
+  <button class="tab" onclick="switchTab('arts19',this)">Ley 19.223</button>
+  <button class="tab" onclick="switchTab('arts21',this)">Ley 21.459</button>
+  <button class="tab" onclick="switchTab('comparar',this)">Comparativa</button>
+  <button class="tab" onclick="switchTab('historia',this)">Historia</button>
+  <button class="tab" onclick="switchTab('tarjetas',this)">Tarjetas</button>
+  <button class="tab" onclick="switchTab('quiz',this)">Quiz (30)</button>
+</div>
+
+<!-- ═══ RESUMEN ═══ -->
+<div id="resumen" class="section active">
+  <div class="card">
+    <div class="card-title"><span class="pill pill-purple">Ley 19.223</span> Marco original — 4 artículos</div>
+    <p>Publicada el <strong>7 de junio de 1993</strong>. Primera ley de ciberdelitos de Latinoamérica. Consta únicamente de <strong>4 artículos</strong>, todos ellos tipos penales. Fue <strong>derogada íntegramente</strong> por la Ley 21.459.</p>
+    <h3>Los 4 artículos</h3>
+    <ul>
+      <li><strong>Art. 1</strong> — Sabotaje informático: destruir o inutilizar maliciosamente un sistema.</li>
+      <li><strong>Art. 2</strong> — Espionaje informático: interceptar o acceder con ánimo de apoderarse de información.</li>
+      <li><strong>Art. 3</strong> — Daño a datos: alterar, dañar o destruir maliciosamente datos de un sistema.</li>
+      <li><strong>Art. 4</strong> — Revelación indebida: revelar o difundir maliciosamente datos de un sistema.</li>
+    </ul>
+    <h3>Principales limitaciones</h3>
+    <ul>
+      <li>Exigía "maliciosamente" (dolo calificado, difícil de probar) en todos sus tipos.</li>
+      <li>El art. 2 exigía además ánimo de apoderarse de la información — casi imposible de probar.</li>
+      <li>No cubría fraude, falsificación, DDoS, ransomware ni abuso de dispositivos.</li>
+      <li>Sin herramientas procesales especiales ni cooperación internacional.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="pill pill-green">Ley 21.459</span> Marco vigente — 21 artículos permanentes</div>
+    <p>Publicada el <strong>20 de junio de 2022</strong>. Deroga íntegramente la Ley 19.223 y se alinea al <strong>Convenio de Budapest</strong>. Se estructura en <strong>3 Títulos</strong> y <strong>21 artículos permanentes</strong>.</p>
+    <h3>Estructura por Títulos</h3>
+    <ul>
+      <li><strong>Título I — Delitos informáticos y sanciones (Arts. 1–10):</strong> 8 tipos penales + atenuante especial (art.9) + agravantes (art.10).</li>
+      <li><strong>Título II — Procedimiento (Arts. 11–14):</strong> Legitimados activos para querella, medios técnicos de investigación, comiso y preservación de evidencia.</li>
+      <li><strong>Título III — Disposiciones finales (Arts. 15–21):</strong> Definiciones legales, responsabilidad de personas jurídicas, modificaciones a otros cuerpos legales y derogación de la Ley 19.223.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><span class="pill pill-red">Relación entre ambas leyes</span></div>
+    <p>El <strong>artículo 17</strong> de la Ley 21.459 deroga <strong>íntegramente</strong> la Ley 19.223. No se trata de una derogación parcial: toda la ley antigua queda sin efecto. El art. 17 indica además que toda referencia legal o reglamentaria a la Ley 19.223 debe entenderse hecha a la Ley 21.459.</p>
+  </div>
+</div>
+
+<!-- ═══ LEY 19.223 ═══ -->
+<div id="arts19" class="section">
+  <div class="card">
+    <div class="card-title"><span class="pill pill-purple">Ley 19.223</span> Los 4 artículos — texto y análisis</div>
+    <p>La ley completa constaba de <strong>4 artículos</strong>, todos tipos penales. Fue derogada íntegramente por el art. 17 de la Ley 21.459 en 2022.</p>
+  </div>
+
+  <div class="art-block">
+    <div class="art-num">Artículo 1 — Sabotaje informático</div>
+    <div class="art-title">Destrucción o inutilización de sistemas</div>
+    <div class="art-body">
+      Sancionaba a quien <strong>maliciosamente destruya o inutilice</strong> un sistema de tratamiento de información o sus partes o componentes, o que <strong>impida, obstaculice o modifique</strong> su funcionamiento.<br><br>
+      Contemplaba dos hipótesis agravadas: (a) si como consecuencia se afectaban datos del sistema, y (b) si el hecho causaba un <strong>grave daño económico</strong>. Protegía la disponibilidad del sistema como infraestructura física y lógica.<br><br>
+      <strong>Crítica:</strong> El adverbio "maliciosamente" exigía probar dolo directo intenso. Un daño accidental o consecuencia colateral no configuraba el delito, lo que dificultó numerosas persecuciones penales.
+    </div>
+    <span class="pena pena-purple">Presidio menor grado medio a mayor grado mínimo (agravado: mayor grado mínimo a mayor grado medio)</span>
+  </div>
+
+  <div class="art-block">
+    <div class="art-num">Artículo 2 — Espionaje / Interceptación</div>
+    <div class="art-title">Acceso con ánimo de apoderarse de información</div>
+    <div class="art-body">
+      Sancionaba a quien con <strong>ánimo de apoderarse, usar o conocer indebidamente</strong> de la información contenida en un sistema de tratamiento de datos, lo <strong>intercepte, interfiera o acceda</strong> a él.<br><br>
+      El tipo exigía dos elementos: (1) el acceso, interceptación o interferencia al sistema, y (2) un <strong>elemento subjetivo especial</strong>: el ánimo de apoderarse o conocer la información. Este segundo requisito fue la mayor debilidad del artículo: era prácticamente imposible de acreditar sin confesión del imputado, generando impunidad sistemática en casos de hacking.<br><br>
+      <strong>Diferencia con la Ley 21.459:</strong> El art. 2 de la nueva ley (acceso ilícito) elimina por completo el ánimo especial. Basta el acceso no autorizado.
+    </div>
+    <span class="pena pena-purple">Presidio menor grado mínimo a medio</span>
+  </div>
+
+  <div class="art-block">
+    <div class="art-num">Artículo 3 — Daño a los datos</div>
+    <div class="art-title">Alteración, daño o destrucción de datos</div>
+    <div class="art-body">
+      Sancionaba al que maliciosamente <strong>altere, dañe o destruya</strong> los datos contenidos en un sistema de tratamiento de información.<br><br>
+      Se diferenciaba del art. 1 en su objeto: el art. 1 protegía el <em>sistema como infraestructura</em>; el art. 3 protegía los <em>datos almacenados</em>. Cubría casos como modificar registros contables, borrar archivos o corromper bases de datos.<br><br>
+      <strong>Limitación frente al ransomware:</strong> El ransomware <em>cifra</em> los datos sin destruirlos. Técnicamente, los datos siguen existiendo, solo son inaccesibles. La Ley 19.223 no cubría la conducta de "hacer inaccesibles" los datos. La Ley 21.459 resolvió esto en su art. 4.
+    </div>
+    <span class="pena pena-purple">Presidio menor grado medio</span>
+  </div>
+
+  <div class="art-block">
+    <div class="art-num">Artículo 4 — Revelación indebida</div>
+    <div class="art-title">Divulgación maliciosa de datos</div>
+    <div class="art-body">
+      Sancionaba al que maliciosamente <strong>revele o difunda</strong> los datos contenidos en un sistema de información. Contemplaba una <strong>agravante</strong>: si el autor era el <em>responsable del sistema</em>, la pena se aumentaba en un grado.<br><br>
+      Protegía la confidencialidad frente a divulgaciones no autorizadas. Cubría funcionarios que vendían bases de datos, empleados que filtraban información corporativa y personas que publicaban datos privados ajenos.<br><br>
+      La agravante para el responsable del sistema reconocía que quien traiciona una posición de confianza tiene mayor culpabilidad. Este principio se mantiene en la Ley 21.459 (art. 10, agravante N°1: abusar de posición de confianza).
+    </div>
+    <span class="pena pena-purple">Presidio menor grado medio — agravado en un grado si es responsable del sistema</span>
+  </div>
+</div>
+
+<!-- ═══ LEY 21.459 ═══ -->
+<div id="arts21" class="section">
+  <div class="card">
+    <div class="card-title"><span class="pill pill-green">Ley 21.459</span> Los 21 artículos permanentes</div>
+    <p>La ley se organiza en <strong>3 Títulos</strong>. A continuación, cada artículo con su contenido real.</p>
+  </div>
+
+  <span class="slabel">Título I — Delitos informáticos y sanciones (Arts. 1–10)</span>
+
+  <div class="art-block green">
+    <div class="art-num green">Artículo 1 — Ataque a la integridad del sistema</div>
+    <div class="art-title">Sabotaje / DDoS / Interrupción del servicio</div>
+    <div class="art-body">
+      Sanciona al que <strong>obstaculice o impida el normal funcionamiento</strong>, total o parcial, de un sistema informático, a través de la introducción, transmisión, daño, deterioro, alteración o supresión de datos informáticos.<br><br>
+      <strong>Novedad clave:</strong> Cubre los ataques <em>DDoS</em> (saturar un servidor con tráfico para dejarlo fuera de servicio) y cualquier medio de interrupción del sistema, incluso sin destruir datos. Bajo la Ley 19.223 esto no encajaba en ningún artículo porque no implicaba "destruir" el sistema ni "alterar" datos.
+    </div>
+    <span class="pena pena-green">Presidio menor grado medio a máximo</span>
+  </div>
+
+  <div class="art-block green">
+    <div class="art-num green">Artículo 2 — Acceso ilícito</div>
+    <div class="art-title">Hacking — Intrusión no autorizada</div>
+    <div class="art-body">
+      Sanciona al que, <strong>sin autorización o excediendo la autorización que posea</strong> y superando barreras técnicas o medidas tecnológicas de seguridad, <strong>acceda a un sistema informático</strong>.<br><br>
+      <strong>Hipótesis agravadas dentro del mismo artículo:</strong><br>
+      — Si el acceso fue realizado con <strong>ánimo de apoderarse o usar la información</strong>: pena mayor.<br>
+      — Si quien accedió <strong>divulga la información</strong> obtenida ilícitamente: pena mayor.<br>
+      — Si es la misma persona quien accedió y divulgó: pena aún mayor.<br><br>
+      <strong>Diferencia con Ley 19.223 art.2:</strong> Ya no se exige el ánimo como elemento del tipo base. El acceso no autorizado, por sí solo, es delito. El ánimo pasa a ser una agravante dentro del mismo artículo.
+    </div>
+    <span class="pena pena-green">Base: presidio menor grado mínimo o multa 11–20 UTM · Con ánimo/divulgación: presidio menor grado mínimo a medio · Si accedió y divulgó: presidio menor grado medio a máximo</span>
+  </div>
+
+  <div class="art-block green">
+    <div class="art-num green">Artículo 3 — Interceptación ilícita</div>
+    <div class="art-title">Captura de comunicaciones y datos en tránsito</div>
+    <div class="art-body">
+      Dos hipótesis:<br><br>
+      <strong>(1)</strong> Sanciona al que indebidamente <strong>intercepte, interrumpa o interfiera</strong>, por medios técnicos, la <strong>transmisión no pública</strong> de información en un sistema informático o entre dos o más sistemas.<br><br>
+      <strong>(2)</strong> Sanciona al que indebidamente <strong>capte datos</strong> contenidos en sistemas informáticos a través de <strong>emisiones electromagnéticas</strong> provenientes de éstos (ej: ataques TEMPEST, Van Eck phreaking).<br><br>
+      Ambas hipótesis requieren medios técnicos. Cubre sniffers de red, ataques man-in-the-middle, intercepción Wi-Fi y captura de radiaciones electromagnéticas.
+    </div>
+    <span class="pena pena-green">Presidio menor grado medio · Hipótesis electromagnética: presidio menor grado medio a máximo</span>
+  </div>
+
+  <div class="art-block green">
+    <div class="art-num green">Artículo 4 — Ataque a la integridad de los datos</div>
+    <div class="art-title">Daño, borrado, alteración o supresión de datos</div>
+    <div class="art-body">
+      Sanciona al que indebidamente <strong>altere, dañe o suprima datos informáticos</strong>, siempre que con ello se cause un <strong>daño grave al titular</strong> de esos datos.<br><br>
+      <strong>Requiere daño grave:</strong> A diferencia de la Ley 19.223 art. 3, este tipo exige que el daño al titular sea grave. Esto introduce un elemento de resultado que puede dificultar la persecución en casos de daños menores.<br><br>
+      Cubre borrado de archivos críticos, corrupción de bases de datos, eliminación de registros médicos o financieros, etc.
+    </div>
+    <span class="pena pena-green">Presidio menor grado medio</span>
+  </div>
+
+  <div class="art-block green">
+    <div class="art-num green">Artículo 5 — Falsificación informática</div>
+    <div class="art-title">Creación de datos digitales no auténticos</div>
+    <div class="art-body">
+      Sanciona al que indebidamente <strong>introduzca, altere, dañe o suprima datos informáticos</strong> con la <strong>intención de que sean tomados como auténticos o utilizados para generar documentos auténticos</strong>.<br><br>
+      Cubre: alterar contratos digitales, falsificar firmas electrónicas, modificar certificados, adulterar declaraciones tributarias electrónicas o manipular registros de sistemas de gestión documental.<br><br>
+      <strong>Agravante dentro del artículo:</strong> Si el delito es cometido por un <strong>empleado público abusando de su oficio</strong>, la pena sube de presidio menor máximo a presidio mayor mínimo.
+    </div>
+    <span class="pena pena-green">Presidio menor grado medio a máximo · Empleado público: presidio menor máximo a presidio mayor mínimo</span>
+  </div>
+
+  <div class="art-block green">
+    <div class="art-num green">Artículo 6 — Receptación de datos informáticos</div>
+    <div class="art-title">Comercialización de datos robados</div>
+    <div class="art-body">
+      Sanciona al que, <strong>conociendo su origen ilícito o no pudiendo menos que conocerlo</strong>, <strong>comercialice, transfiera o almacene</strong> con fines ilícitos, a cualquier título, datos informáticos provenientes de los delitos de los <strong>artículos 2°, 3° y 5°</strong> (acceso ilícito, interceptación ilícita y falsificación informática).<br><br>
+      <strong>Puntos clave:</strong><br>
+      — La fórmula "no pudiendo menos que conocerlo" incorpora el <em>dolo eventual</em>: quien cierra los ojos ante el origen ilícito también responde.<br>
+      — Solo cubre datos de los arts. 2, 3 y 5, no de todos los delitos de la ley.<br>
+      — La pena es la del delito origen, rebajada en un grado.
+    </div>
+    <span class="pena pena-green">Pena del delito de origen rebajada en un grado</span>
+  </div>
+
+  <div class="art-block green">
+    <div class="art-num green">Artículo 7 — Fraude informático</div>
+    <div class="art-title">Manipulación de sistemas para obtener beneficio económico</div>
+    <div class="art-body">
+      Sanciona al que, <strong>causando perjuicio a otro</strong>, con la finalidad de <strong>obtener un beneficio económico</strong> para sí o un tercero, <strong>manipule un sistema informático</strong> mediante la introducción, alteración, daño o supresión de datos informáticos o a través de cualquier interferencia en el funcionamiento del sistema.<br><br>
+      La pena varía según el monto del perjuicio:<br>
+      — Perjuicio <strong>hasta 4 UTM</strong>: presidio menor mínimo + multa 5–10 UTM.<br>
+      — Perjuicio entre <strong>4 y 40 UTM</strong>: presidio menor medio + multa 6–10 UTM.<br>
+      — Perjuicio entre <strong>40 y 400 UTM</strong>: presidio menor medio a máximo + multa 11–15 UTM.<br>
+      — Perjuicio <strong>superior a 400 UTM</strong>: presidio menor máximo + multa 21–30 UTM.<br><br>
+      Cubre phishing bancario, ATM jackpotting, fraude con tarjetas, manipulación de sistemas de pago electrónico.
+    </div>
+    <span class="pena pena-green">Presidio menor mínimo a máximo según monto + multa (escalonada)</span>
+  </div>
+
+  <div class="art-block green">
+    <div class="art-num green">Artículo 8 — Abuso de dispositivos</div>
+    <div class="art-title">Preparación de ciberataques — Tenencia de herramientas</div>
+    <div class="art-body">
+      Sanciona al que, para la perpetración de los delitos de los <strong>artículos 1° a 4° o de las conductas del art. 7° de la Ley 20.009</strong> (uso fraudulento de tarjetas), <strong>entregue u obtenga para su utilización, importe, difunda</strong> o realice otra forma de puesta a disposición uno o más <strong>dispositivos, programas computacionales, contraseñas, códigos de acceso u otros datos similares</strong>, creados o adaptados principalmente para la perpetración de dichos delitos.<br><br>
+      Es un <strong>delito de preparación</strong>: sanciona el suministro y distribución de herramientas de ataque antes de que el ataque ocurra. Cubre exploit kits, malware, listas de contraseñas robadas y dispositivos de skimming.<br><br>
+      <strong>Importante:</strong> El artículo referencia al art. 7° de la Ley 20.009, que regula el uso fraudulento de tarjetas de crédito, ampliando el alcance del abuso de dispositivos más allá de la Ley 21.459.
+    </div>
+    <span class="pena pena-green">Presidio menor grado mínimo + multa 5–10 UTM</span>
+  </div>
+
+  <div class="art-block green">
+    <div class="art-num green">Artículo 9 — Atenuante especial de cooperación eficaz</div>
+    <div class="art-title">Rebaja de pena por colaboración con la investigación</div>
+    <div class="art-body">
+      Establece una <strong>circunstancia atenuante especial</strong> que permite rebajar la pena hasta en un grado: la <strong>cooperación eficaz</strong> que conduzca al esclarecimiento de los hechos investigados constitutivos de delitos de esta ley, permita identificar a los responsables, o sirva para <strong>prevenir o impedir la perpetración o consumación</strong> de otros delitos de igual o mayor gravedad.<br><br>
+      <strong>"Cooperación eficaz"</strong> se define como el suministro de datos o informaciones <em>precisas, verídicas y comprobables</em> que contribuyan necesariamente a los fines señalados.<br><br>
+      Si el Ministerio Público estima que existe cooperación eficaz, debe expresarlo en el escrito de formalización y/o acusación. La rebaja se determina después de individualizar la sanción según las circunstancias comunes.
+    </div>
+    <span class="pena pena-amber">Atenuante: rebaja hasta en un grado de la pena</span>
+  </div>
+
+  <div class="art-block green">
+    <div class="art-num green">Artículo 10 — Circunstancias agravantes especiales</div>
+    <div class="art-title">Agravantes que aumentan la pena en un grado</div>
+    <div class="art-body">
+      Establece <strong>circunstancias agravantes especiales</strong> para todos los delitos de la ley, que aumentan la pena en un grado:<br><br>
+      <strong>Agravante 1:</strong> Cometer el delito <strong>abusando de una posición de confianza</strong> en la administración del sistema informático o como custodio de datos, en razón de un cargo o función.<br><br>
+      <strong>Agravante 2:</strong> Cometer el delito <strong>abusando de la vulnerabilidad, confianza o desconocimiento</strong> de niños, niñas, adolescentes o adultos mayores.<br><br>
+      <strong>Agravante 3:</strong> Cuando el delito <strong>afecte o interrumpa la provisión de servicios de utilidad pública</strong> tales como electricidad, gas, agua, transporte, telecomunicaciones o financieros, o el normal desenvolvimiento de <strong>procesos electorales</strong> (Ley 18.700).
+    </div>
+    <span class="pena pena-amber">Agravante: aumenta en un grado la pena del delito</span>
+  </div>
+
+  <span class="slabel">Título II — Procedimiento (Arts. 11–14)</span>
+
+  <div class="art-block green">
+    <div class="art-num green">Artículo 11 — Legitimados activos para querella</div>
+    <div class="art-title">Ampliación de quiénes pueden iniciar la investigación</div>
+    <div class="art-body">
+      Además de las normas generales del ejercicio de la acción penal, la investigación puede iniciarse ante querella de:<br><br>
+      — <strong>Ministro del Interior y Seguridad Pública</strong><br>
+      — <strong>Delegados presidenciales regionales</strong><br>
+      — <strong>Delegados presidenciales provinciales</strong><br><br>
+      <strong>Presupuesto:</strong> Para que estas querellas sean procedentes, las conductas deben haber <em>interrumpido el normal funcionamiento de un servicio de utilidad pública</em>.
+    </div>
+  </div>
+
+  <div class="art-block green">
+    <div class="art-num green">Artículo 12 — Medios técnicos de investigación</div>
+    <div class="art-title">Interceptación, filmación y agentes encubiertos digitales</div>
+    <div class="art-body">
+      Cuando se investiguen los delitos de los arts. 1°, 2°, 3°, 4°, 5° y 7°, y la situación lo hiciere imprescindible y existieren fundadas sospechas basadas en hechos determinados, el juez de garantía puede autorizar, a solicitud del Ministerio Público:<br><br>
+      — <strong>Interceptación de comunicaciones telefónicas</strong> (arts. 222–225 CPP).<br>
+      — <strong>Otros medios técnicos</strong>: fotografía, filmación u otros medios de reproducción de imágenes (art. 226 CPP).<br>
+      — <strong>Agentes encubiertos digitales</strong>: funcionarios policiales que actúan bajo identidad supuesta en comunicaciones mantenidas en <em>canales cerrados de comunicación</em>, para esclarecer hechos, identificar responsables, impedirlos o comprobarlos.
+    </div>
+  </div>
+
+  <div class="art-block green">
+    <div class="art-num green">Artículo 13 — Comiso de especies</div>
+    <div class="art-title">Decomiso de instrumentos, efectos y utilidades del delito</div>
+    <div class="art-body">
+      Establece que caerán especialmente en <strong>comiso</strong> los instrumentos de los delitos de la ley, los efectos que de ellos provengan y las utilidades que hubieren originado, cualquiera sea su naturaleza jurídica.<br><br>
+      Cuando no sea posible el decomiso de las especies, se puede aplicar el <strong>comiso a una suma de dinero equivalente</strong> a su valor, respecto de los responsables del delito. Esto evita que la imposibilidad de incautar el bien concreto impida la sanción patrimonial.
+    </div>
+  </div>
+
+  <div class="art-block green">
+    <div class="art-num green">Artículo 14 — Preservación y custodia de evidencia digital</div>
+    <div class="art-title">Estándares para el manejo de evidencia electrónica</div>
+    <div class="art-body">
+      Entrega al <strong>Fiscal Nacional</strong> la facultad de dictar instrucciones sobre los estándares de preservación y custodia de los antecedentes de investigación que se encuentren en <strong>formato electrónico</strong>, contenidos en documentos electrónicos o sistemas informáticos, o que correspondan a datos informáticos.<br><br>
+      Garantiza la integridad y cadena de custodia de la evidencia digital a lo largo del proceso penal, aspecto crítico dado que la evidencia digital es fácilmente alterable.
+    </div>
+  </div>
+
+  <span class="slabel">Título III — Disposiciones finales (Arts. 15–21)</span>
+
+  <div class="art-block amber">
+    <div class="art-num amber">Artículo 15 — Definiciones legales</div>
+    <div class="art-title">Glosario de términos para aplicación de la ley</div>
+    <div class="art-body">
+      Define los conceptos clave para interpretar la ley:<br><br>
+      — <strong>Datos informáticos:</strong> Toda representación de hechos, información o conceptos expresados en cualquier forma que se preste a tratamiento informático, incluidos los programas diseñados para que un sistema informático ejecute una función.<br>
+      — <strong>Sistema informático:</strong> Todo dispositivo aislado o conjunto de dispositivos interconectados o relacionados entre sí, cuya función sea el tratamiento automatizado de datos en ejecución de un programa.<br>
+      — <strong>Prestadores de servicios:</strong> Toda entidad pública o privada que ofrezca a los usuarios la posibilidad de comunicar a través de un sistema informático y cualquier entidad que procese o almacene datos para dicho servicio.
+    </div>
+  </div>
+
+  <div class="art-block amber">
+    <div class="art-num amber">Artículo 16 — Responsabilidad penal de las personas jurídicas</div>
+    <div class="art-title">Extensión de la responsabilidad a empresas</div>
+    <div class="art-body">
+      Establece que los delitos contemplados en la ley pueden generar <strong>responsabilidad penal de las personas jurídicas</strong> conforme a la <strong>Ley 20.393</strong> (que regula la responsabilidad penal de empresas en Chile).<br><br>
+      Esto significa que una empresa cuyos empleados o directivos cometan ciberdelitos en su nombre o beneficio puede ser sancionada directamente como persona jurídica, no solo sus representantes individuales.
+    </div>
+  </div>
+
+  <div class="art-block amber">
+    <div class="art-num amber">Artículos 17 y 18 — Modificaciones a otros cuerpos legales</div>
+    <div class="art-title">Ajustes al Código Penal y Código Procesal Penal</div>
+    <div class="art-body">
+      — <strong>Art. 17:</strong> Incorpora modificaciones al <strong>Código Penal</strong>, especialmente en materia de estafa y otros delitos patrimoniales, para adecuarlos a la nueva realidad digital y referencias a la Ley 21.459.<br><br>
+      — <strong>Art. 18:</strong> Introduce modificaciones al <strong>Código Procesal Penal</strong>, incorporando el nuevo artículo 218 bis sobre la cooperación de los prestadores de servicios en la entrega de datos, regula la preservación urgente de datos y las facultades de investigación digital del Ministerio Público.
+    </div>
+  </div>
+
+  <div class="art-block amber">
+    <div class="art-num amber">Artículo 19 — Modificación a la Ley 19.223 (transitorio)</div>
+    <div class="art-title">Norma de transición entre leyes</div>
+    <div class="art-body">
+      Contiene disposiciones transitorias relativas a la relación entre la nueva ley y la legislación modificada, estableciendo cómo se aplica la ley en el período de transición y qué referencias legales se entienden actualizadas.
+    </div>
+  </div>
+
+  <div class="art-block amber">
+    <div class="art-num amber">Artículo 20 — Modificación a la Ley 20.393</div>
+    <div class="art-title">Responsabilidad penal de personas jurídicas — ajuste</div>
+    <div class="art-body">
+      Modifica la Ley 20.393 sobre responsabilidad penal de personas jurídicas para incorporar expresamente los delitos informáticos de la Ley 21.459 como delitos base que pueden generar responsabilidad de las empresas.
+    </div>
+  </div>
+
+  <div class="art-block amber">
+    <div class="art-num amber">Artículo 21 — Derogación de la Ley 19.223</div>
+    <div class="art-title">Extinción del marco legal anterior</div>
+    <div class="art-body">
+      Deroga <strong>íntegramente</strong> la Ley 19.223 de 1993. A partir de la entrada en vigencia de la Ley 21.459, toda referencia legal o reglamentaria a la Ley 19.223 debe entenderse hecha a la presente ley.<br><br>
+      <strong>Nota:</strong> Distintas fuentes atribuyen la derogación al art. 17 o al art. 21; la estructura exacta varía según la versión del texto de promulgación. Lo relevante es que la derogación es total e íntegra.
+    </div>
+  </div>
+</div>
+
+<!-- ═══ COMPARATIVA ═══ -->
+<div id="comparar" class="section">
+  <div class="compare-grid">
+    <div class="compare-col col-19">
+      <div class="compare-header"><div class="lnum">LEY 19.223</div><h3>Marco original (1993)</h3></div>
+      <div class="compare-body">
+        <div class="compare-row"><span class="label">Año</span><span class="value">1993</span></div>
+        <div class="compare-row"><span class="label">Total artículos</span><span class="value">4 (todos tipos penales)</span></div>
+        <div class="compare-row"><span class="label">Sabotaje / interrupción</span><span class="value">Art. 1 — solo destrucción física/lógica</span></div>
+        <div class="compare-row"><span class="label">Acceso no autorizado</span><span class="value">Art. 2 — exige ánimo especial</span></div>
+        <div class="compare-row"><span class="label">Daño a datos</span><span class="value">Art. 3 — alterar, dañar, destruir</span></div>
+        <div class="compare-row"><span class="label">Divulgación de datos</span><span class="value">Art. 4 — revelar o difundir</span></div>
+        <div class="compare-row"><span class="label">DDoS</span><span class="value">No cubierto</span></div>
+        <div class="compare-row"><span class="label">Ransomware</span><span class="value">Vacío legal</span></div>
+        <div class="compare-row"><span class="label">Fraude informático</span><span class="value">No tipificado</span></div>
+        <div class="compare-row"><span class="label">Falsificación digital</span><span class="value">No tipificada</span></div>
+        <div class="compare-row"><span class="label">Abuso de dispositivos</span><span class="value">No contemplado</span></div>
+        <div class="compare-row"><span class="label">Agravantes especiales</span><span class="value">Solo agravante para responsable del sistema (art.4)</span></div>
+        <div class="compare-row"><span class="label">Atenuante especial</span><span class="value">No existe</span></div>
+        <div class="compare-row"><span class="label">Medios de investigación</span><span class="value">Sin disposiciones especiales</span></div>
+        <div class="compare-row"><span class="label">Agentes encubiertos digitales</span><span class="value">No regulados</span></div>
+        <div class="compare-row"><span class="label">Comiso digital</span><span class="value">Sin norma especial</span></div>
+        <div class="compare-row"><span class="label">Definiciones legales</span><span class="value">Sin glosario</span></div>
+        <div class="compare-row"><span class="label">Resp. personas jurídicas</span><span class="value">No contemplada</span></div>
+        <div class="compare-row"><span class="label">Dolo</span><span class="value">"Maliciosamente" — calificado</span></div>
+        <div class="compare-row"><span class="label">Estado actual</span><span class="value">Derogada íntegramente</span></div>
+      </div>
+    </div>
+    <div class="compare-col col-21">
+      <div class="compare-header"><div class="lnum">LEY 21.459</div><h3>Marco vigente (2022)</h3></div>
+      <div class="compare-body">
+        <div class="compare-row"><span class="label">Año</span><span class="value">2022</span></div>
+        <div class="compare-row"><span class="label">Total artículos</span><span class="value">21 permanentes (3 Títulos)</span></div>
+        <div class="compare-row"><span class="label">Sabotaje / interrupción</span><span class="value">Art. 1 — incluye DDoS y toda interrupción</span></div>
+        <div class="compare-row"><span class="label">Acceso no autorizado</span><span class="value">Art. 2 — sin ánimo especial; ánimo es agravante</span></div>
+        <div class="compare-row"><span class="label">Daño a datos</span><span class="value">Art. 4 — alterar, dañar, suprimir (con daño grave)</span></div>
+        <div class="compare-row"><span class="label">Divulgación de datos</span><span class="value">Art. 2 (acceso+divulgación) y art. 6 (receptación)</span></div>
+        <div class="compare-row"><span class="label">DDoS</span><span class="value">Art. 1 — expresamente cubierto</span></div>
+        <div class="compare-row"><span class="label">Ransomware</span><span class="value">Art. 4 — supresión de datos / art. 1 — interrupción del sistema</span></div>
+        <div class="compare-row"><span class="label">Fraude informático</span><span class="value">Art. 7 — tipificado con pena escalonada</span></div>
+        <div class="compare-row"><span class="label">Falsificación digital</span><span class="value">Art. 5 — tipificada</span></div>
+        <div class="compare-row"><span class="label">Abuso de dispositivos</span><span class="value">Art. 8 — tipificado</span></div>
+        <div class="compare-row"><span class="label">Agravantes especiales</span><span class="value">Art. 10 — 3 agravantes (confianza, menores/adultos, servicios públicos)</span></div>
+        <div class="compare-row"><span class="label">Atenuante especial</span><span class="value">Art. 9 — cooperación eficaz (rebaja hasta un grado)</span></div>
+        <div class="compare-row"><span class="label">Medios de investigación</span><span class="value">Art. 12 — intercepción, filmación, agentes encubiertos</span></div>
+        <div class="compare-row"><span class="label">Agentes encubiertos digitales</span><span class="value">Art. 12 — expresamente regulados</span></div>
+        <div class="compare-row"><span class="label">Comiso digital</span><span class="value">Art. 13 — instrumentos, efectos y utilidades</span></div>
+        <div class="compare-row"><span class="label">Definiciones legales</span><span class="value">Art. 15 — datos, sistema, prestadores de servicios</span></div>
+        <div class="compare-row"><span class="label">Resp. personas jurídicas</span><span class="value">Art. 16 — vía Ley 20.393</span></div>
+        <div class="compare-row"><span class="label">Dolo</span><span class="value">Dolo simple (sin adverbio calificador)</span></div>
+        <div class="compare-row"><span class="label">Estado actual</span><span class="value">Íntegramente vigente</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HISTORIA ═══ -->
+<div id="historia" class="section">
+  <div class="card" style="margin-bottom:1.5rem;">
+    <div class="card-title">Línea de tiempo del derecho penal informático en Chile</div>
+  </div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">1993 — 7 de junio</div><div class="tl-title">Ley 19.223 — Primera de Latinoamérica</div><div class="tl-desc">Chile promulga la primera ley de ciberdelitos de la región. 4 artículos: sabotaje, interceptación, daño de datos y divulgación. Internet era prácticamente inexistente para el público general.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">1995–2002</div><div class="tl-title">Masificación de internet — primeras brechas legales</div><div class="tl-desc">El crecimiento exponencial de internet expone las limitaciones de la Ley 19.223. Surgen el fraude en línea, virus más sofisticados y las primeras formas de hacking económico que no encajan en los tipos penales de 1993.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2001</div><div class="tl-title">Convenio de Budapest sobre Ciberdelincuencia</div><div class="tl-desc">El Consejo de Europa abre a firma el primer tratado internacional de ciberdelitos. Chile no lo suscribe en esta etapa, comenzando a quedar rezagado respecto al estándar global que este tratado establecía.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2000s–2010s</div><div class="tl-title">Era del cibercrimen moderno</div><div class="tl-desc">Aparecen ransomware, botnets, ataques DDoS masivos, phishing bancario industrial y mercados negros de datos. La Ley 19.223 se vuelve prácticamente inaplicable a la mayoría de estas conductas.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2018 — Mayo</div><div class="tl-title">Ciberataque al Banco de Chile — El caso emblema</div><div class="tl-desc">Ciberdelincuentes inutilizan miles de computadores con malware como distracción mientras transfieren más de 10 millones de dólares al extranjero vía SWIFT. El caso expone dramáticamente los límites de la Ley 19.223 y acelera el debate legislativo.</div></div>
+    <div class="tl-item"><div class="tl-dot"></div><div class="tl-date">2018–2021</div><div class="tl-title">Tramitación legislativa de la nueva ley</div><div class="tl-desc">Se inicia el proceso en el Congreso. El proyecto busca alinear Chile al Convenio de Budapest, incorporar nuevos tipos penales modernos y dotar al Ministerio Público de herramientas procesales especializadas para investigar ciberdelitos.</div></div>
+    <div class="tl-item"><div class="tl-dot green"></div><div class="tl-date">2022 — 20 de junio</div><div class="tl-title">Ley 21.459 — Nuevo marco vigente</div><div class="tl-desc">Publicada en el Diario Oficial bajo el gobierno de Gabriel Boric. 21 artículos permanentes en 3 Títulos. Deroga íntegramente la Ley 19.223. Chile se alinea al Convenio de Budapest e incorpora agentes encubiertos digitales, responsabilidad penal de empresas y nuevos delitos como fraude, falsificación y abuso de dispositivos.</div></div>
+    <div class="tl-item"><div class="tl-dot green"></div><div class="tl-date">2022 — Presente</div><div class="tl-title">Implementación y debate jurídico</div><div class="tl-desc">Los fiscales aplican la nueva ley. Se abre debate sobre el art. 8 (abuso de dispositivos) y su relación con los profesionales de ciberseguridad legítimos, y sobre la interpretación del requisito de "daño grave" del art. 4.</div></div>
+  </div>
+</div>
+
+<!-- ═══ TARJETAS ═══ -->
+<div id="tarjetas" class="section">
+  <p style="font-size:13px;color:var(--muted);margin-bottom:1rem;text-align:center;">Haz clic en la tarjeta para ver la definición</p>
+  <div class="flashcard-wrap" onclick="flipCard()">
+    <div class="flashcard" id="fc">
+      <div class="fc-front">
+        <div class="fc-hint">Toca para revelar</div>
+        <div class="fc-term" id="fc-term">...</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:.8rem;font-family:var(--mono);" id="fc-tag"></div>
+      </div>
+      <div class="fc-back">
+        <div class="fc-hint">Definición</div>
+        <div class="fc-def" id="fc-def">...</div>
+      </div>
+    </div>
+  </div>
+  <div class="fc-nav">
+    <button class="btn" onclick="fcNav(-1)">← Anterior</button>
+    <span class="fc-counter" id="fc-counter">1 / 26</span>
+    <button class="btn" onclick="fcNav(1)">Siguiente →</button>
+  </div>
+</div>
+
+<!-- ═══ QUIZ ═══ -->
+<div id="quiz" class="section">
+  <div id="quiz-main">
+    <div class="quiz-progress">
+      <div class="progress-bar"><div class="progress-fill" id="q-progress"></div></div>
+      <div class="progress-text" id="q-counter">1 / 30</div>
+    </div>
+    <div class="quiz-card">
+      <div class="quiz-law-tag"><span class="dot" id="q-dot"></span><span id="q-tag"></span></div>
+      <div class="quiz-question" id="q-question"></div>
+      <div class="options" id="q-options"></div>
+      <div class="feedback" id="q-feedback"></div>
+    </div>
+    <div class="quiz-nav">
+      <span style="font-size:13px;color:var(--muted);" id="q-score-live">Correctas: 0</span>
+      <button class="btn primary" id="q-next" onclick="nextQ()" style="display:none;">Siguiente →</button>
+    </div>
+  </div>
+  <div id="quiz-end" style="display:none;">
+    <div class="score-screen">
+      <div class="fc-hint" style="margin-bottom:1rem;">Resultado final</div>
+      <div class="score-num" id="end-score">0/30</div>
+      <div class="score-label" id="end-msg"></div>
+      <div style="margin-top:2rem;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button class="btn primary" onclick="restartQuiz()">Intentar de nuevo</button>
+        <button class="btn" onclick="switchTabById('tarjetas')">Repasar tarjetas</button>
+        <button class="btn" onclick="switchTabById('arts21')">Ver artículos</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+function switchTab(id,el){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if(el)el.classList.add('active');
+  if(id==='quiz')initQuiz();
+  if(id==='tarjetas')initFlashcards();
+}
+function switchTabById(id){
+  const ids=['resumen','arts19','arts21','comparar','historia','tarjetas','quiz'];
+  const tabs=document.querySelectorAll('.tab');
+  const idx=ids.indexOf(id);
+  if(idx>=0)switchTab(id,tabs[idx]);
+}
+
+const cards=[
+  {term:'Ley 19.223',tag:'General',def:'Primera ley de ciberdelitos de Chile y Latinoamérica (7 jun. 1993). Constaba de solo 4 artículos, todos tipos penales. Fue derogada íntegramente por la Ley 21.459 en 2022.'},
+  {term:'Art. 1 — Ley 19.223',tag:'Ley 19.223',def:'Sabotaje informático: destruir o inutilizar maliciosamente un sistema de tratamiento de información, o impedir su funcionamiento. Agravado si causaba grave daño económico.'},
+  {term:'Art. 2 — Ley 19.223',tag:'Ley 19.223',def:'Espionaje informático: interceptar o acceder a un sistema con ÁNIMO DE APODERARSE O CONOCER la información. El ánimo especial era casi imposible de probar, generando impunidad sistemática.'},
+  {term:'Art. 3 — Ley 19.223',tag:'Ley 19.223',def:'Daño a datos: alterar, dañar o destruir maliciosamente datos de un sistema. No cubría el cifrado por ransomware porque los datos no se destruyen, solo se hacen inaccesibles.'},
+  {term:'Art. 4 — Ley 19.223',tag:'Ley 19.223',def:'Revelación indebida: revelar o difundir maliciosamente datos de un sistema. Agravado si el autor era el responsable del sistema (traición de confianza).'},
+  {term:'Ley 21.459',tag:'General',def:'Marco vigente de ciberdelitos (20 jun. 2022). 21 artículos permanentes en 3 Títulos: Título I (delitos, arts. 1–10), Título II (procedimiento, arts. 11–14), Título III (disposiciones finales, arts. 15–21). Deroga íntegramente la Ley 19.223.'},
+  {term:'Art. 1 — Ley 21.459',tag:'Ley 21.459 · Título I',def:'Ataque a la integridad del sistema: obstaculizar o impedir el normal funcionamiento de un sistema informático mediante introducción, transmisión, daño o supresión de datos. Cubre expresamente los ataques DDoS.'},
+  {term:'Art. 2 — Ley 21.459',tag:'Ley 21.459 · Título I',def:'Acceso ilícito (hacking): acceder sin autorización o excediendo la autorización, superando barreras técnicas. El ánimo ya no es requisito del tipo base sino una hipótesis agravada dentro del mismo artículo. Tiene 3 niveles de pena según conducta.'},
+  {term:'Art. 3 — Ley 21.459',tag:'Ley 21.459 · Título I',def:'Interceptación ilícita: interceptar, interrumpir o interferir por medios técnicos transmisiones no públicas de datos entre sistemas. Segunda hipótesis: captar datos mediante emisiones electromagnéticas (ataques TEMPEST).'},
+  {term:'Art. 4 — Ley 21.459',tag:'Ley 21.459 · Título I',def:'Ataque a la integridad de los datos: alterar, dañar o suprimir datos informáticos, siempre que cause DAÑO GRAVE al titular. El requisito de daño grave distingue este tipo del sabotaje menor.'},
+  {term:'Art. 5 — Ley 21.459',tag:'Ley 21.459 · Título I',def:'Falsificación informática: introducir, alterar, dañar o suprimir datos con intención de que sean tomados como auténticos. Agravante si lo comete un empleado público abusando de su cargo (pena sube a presidio mayor mínimo).'},
+  {term:'Art. 6 — Ley 21.459',tag:'Ley 21.459 · Título I',def:'Receptación de datos: comercializar, transferir o almacenar con fines ilícitos datos provenientes de los delitos de los arts. 2, 3 y 5, conociendo su origen ilícito o no pudiendo menos que conocerlo (dolo eventual). Pena: la del delito origen rebajada en un grado.'},
+  {term:'Art. 7 — Ley 21.459',tag:'Ley 21.459 · Título I',def:'Fraude informático: manipular un sistema (introducir, alterar, dañar, suprimir datos) para obtener beneficio económico causando perjuicio a otro. Pena escalonada según monto del perjuicio (4, 40, 400 UTM como umbrales).'},
+  {term:'Art. 8 — Ley 21.459',tag:'Ley 21.459 · Título I',def:'Abuso de dispositivos: entregar, obtener, importar o difundir dispositivos, programas, contraseñas o datos creados principalmente para cometer delitos de los arts. 1–4 o fraude con tarjetas (Ley 20.009 art.7). Delito de preparación.'},
+  {term:'Art. 9 — Ley 21.459',tag:'Ley 21.459 · Título I',def:'Atenuante especial de cooperación eficaz: quien coopera eficazmente para esclarecer hechos, identificar responsables o prevenir delitos de la ley puede obtener rebaja de pena hasta en un grado. El MP debe expresarlo en la formalización.'},
+  {term:'Art. 10 — Ley 21.459',tag:'Ley 21.459 · Título I',def:'Agravantes especiales (aumentan pena en 1 grado): (1) abuso de posición de confianza en el sistema; (2) abuso de vulnerabilidad de niños, adolescentes o adultos mayores; (3) afectación de servicios de utilidad pública o procesos electorales.'},
+  {term:'Art. 11 — Ley 21.459',tag:'Ley 21.459 · Título II',def:'Legitimados activos para querella: además de las reglas generales, pueden querellar el Ministro del Interior, Delegados presidenciales regionales y provinciales, cuando las conductas interrumpan un servicio de utilidad pública.'},
+  {term:'Art. 12 — Ley 21.459',tag:'Ley 21.459 · Título II',def:'Medios técnicos de investigación (con autorización judicial): interceptación de comunicaciones telefónicas, fotografía y filmación, y AGENTES ENCUBIERTOS DIGITALES (funcionarios que actúan bajo identidad supuesta en canales cerrados).'},
+  {term:'Art. 13 — Ley 21.459',tag:'Ley 21.459 · Título II',def:'Comiso de especies: caen en comiso los instrumentos del delito, sus efectos y las utilidades generadas. Si no es posible el decomiso del bien, se aplica comiso a una suma de dinero equivalente a su valor.'},
+  {term:'Art. 14 — Ley 21.459',tag:'Ley 21.459 · Título II',def:'Preservación y custodia de evidencia digital: el Fiscal Nacional dicta instrucciones sobre estándares de preservación y custodia de antecedentes en formato electrónico, garantizando la cadena de custodia de evidencia digital.'},
+  {term:'Art. 15 — Ley 21.459',tag:'Ley 21.459 · Título III',def:'Definiciones legales: datos informáticos (representaciones de hechos o conceptos que se prestan a tratamiento informático, incluidos programas), sistema informático (dispositivo o conjunto de dispositivos para tratamiento automatizado de datos), prestadores de servicios.'},
+  {term:'Art. 16 — Ley 21.459',tag:'Ley 21.459 · Título III',def:'Responsabilidad penal de personas jurídicas: los delitos de la Ley 21.459 pueden generar responsabilidad penal de empresas conforme a la Ley 20.393, pudiendo ser sancionadas las personas jurídicas directamente.'},
+  {term:'Arts. 17 y 18 — Ley 21.459',tag:'Ley 21.459 · Título III',def:'Modificaciones a otros cuerpos legales: art. 17 modifica el Código Penal; art. 18 modifica el Código Procesal Penal incorporando el nuevo art. 218 bis sobre cooperación de prestadores de servicios y reglas de preservación urgente de datos.'},
+  {term:'Art. 21 — Ley 21.459 (derogación)',tag:'Ley 21.459 · Título III',def:'Deroga íntegramente la Ley 19.223 de 1993. Toda referencia legal o reglamentaria a la Ley 19.223 debe entenderse hecha a la Ley 21.459. La derogación es total, no parcial.'},
+  {term:'Convenio de Budapest',tag:'Contexto',def:'Primer tratado internacional sobre ciberdelincuencia (2001), del Consejo de Europa. Es el estándar global de referencia. La Ley 21.459 adapta Chile íntegramente a sus tipos penales y mecanismos de cooperación.'},
+  {term:'Agentes encubiertos digitales',tag:'Ley 21.459 · Art. 12',def:'Funcionarios policiales que actúan bajo identidad supuesta en comunicaciones mantenidas en canales cerrados de comunicación, para esclarecer delitos informáticos, identificar responsables, impedirlos o comprobarlos. Requieren autorización judicial.'},
+];
+
+let fcIdx=0;
+function initFlashcards(){fcIdx=0;renderCard();}
+function renderCard(){
+  const c=cards[fcIdx];
+  document.getElementById('fc-term').textContent=c.term;
+  document.getElementById('fc-tag').textContent=c.tag;
+  document.getElementById('fc-def').textContent=c.def;
+  document.getElementById('fc-counter').textContent=(fcIdx+1)+' / '+cards.length;
+  document.getElementById('fc').classList.remove('flipped');
+}
+function flipCard(){document.getElementById('fc').classList.toggle('flipped');}
+function fcNav(dir){fcIdx=(fcIdx+dir+cards.length)%cards.length;renderCard();}
+initFlashcards();
+
+const questions=[
+  {q:'¿Cuántos artículos tenía la Ley 19.223 y de qué tipo eran?',opts:['2 artículos penales y 2 procesales','4 artículos, todos tipos penales','6 artículos: 4 penales y 2 de modificación al Código Penal','8 artículos distribuidos en 2 títulos'],ans:1,tag:'Ley 19.223',exp:'La Ley 19.223 tenía exactamente 4 artículos, todos ellos tipos penales (sabotaje, interceptación, daño a datos y revelación). No tenía artículos procesales ni de otro tipo. Fue derogada íntegramente por la Ley 21.459.'},
+  {q:'¿Qué conducta tipificaba el Artículo 1 de la Ley 19.223?',opts:['Revelar datos de un sistema','Interceptar comunicaciones digitales','Destruir o inutilizar maliciosamente un sistema informático','Acceder sin autorización a un sistema'],ans:2,tag:'Ley 19.223 · Art. 1',exp:'El Art. 1 era el sabotaje informático: destruir o inutilizar maliciosamente un sistema de tratamiento de información, o impedir, obstaculizar o modificar su funcionamiento. Protegía la disponibilidad del sistema.'},
+  {q:'¿Qué elemento subjetivo especial exigía el Artículo 2 de la Ley 19.223 para el acceso a sistemas?',opts:['Ánimo de lucro','Ánimo de apoderarse o conocer la información del sistema','Que el daño fuera superior a 10 UTM','Que el acceso fuera reiterado más de tres veces'],ans:1,tag:'Ley 19.223 · Art. 2',exp:'El Art. 2 exigía que el autor actuara con "ánimo de apoderarse, usar o conocer indebidamente" la información. Este elemento subjetivo especial era casi imposible de probar en juicio sin confesión del imputado, generando impunidad sistemática en casos reales de hacking.'},
+  {q:'¿Por qué el ransomware no encajaba bien en el Artículo 3 de la Ley 19.223?',opts:['Porque el art. 3 solo cubría daños a hardware físico','Porque el art. 3 cubría alterar, dañar o destruir datos, pero el ransomware cifra los datos sin destruirlos, haciéndolos inaccesibles','Porque el ransomware requería internet y la ley era previa a internet','Porque la pena era insuficiente para el monto de los rescates'],ans:1,tag:'Ley 19.223 · Art. 3',exp:'El Art. 3 sancionaba "alterar, dañar o destruir" datos. El ransomware cifra los datos: los datos siguen existiendo físicamente, solo son inaccesibles porque el atacante tiene la clave. Esta conducta no encajaba en "destruir o dañar". La Ley 21.459 resolvió esto en su art. 4 y art. 1.'},
+  {q:'¿Qué agravante especial contemplaba el Artículo 4 de la Ley 19.223?',opts:['Si se afectaba infraestructura del Estado','Si el autor era el responsable del sistema que contenía los datos revelados','Si el daño causado superaba las 40 UTM','Si el delito era cometido con medios técnicos sofisticados'],ans:1,tag:'Ley 19.223 · Art. 4',exp:'El Art. 4 establecía que si quien revelaba o difundía los datos maliciosamente era el responsable del sistema, la pena se aumentaba en un grado. Se reconocía que traicionar una posición de confianza merece mayor sanción.'},
+  {q:'¿Cómo deroga la Ley 21.459 a la Ley 19.223?',opts:['Solo deroga los arts. 1 y 2 de la Ley 19.223','Deroga los arts. 1 al 4 pero mantiene vigentes los arts. 5 y 6','La deroga íntegramente en su totalidad','La suspende pero no la deroga formalmente'],ans:2,tag:'Relación entre leyes',exp:'A diferencia de lo que a veces se afirma, la Ley 21.459 deroga ÍNTEGRAMENTE la Ley 19.223 en su totalidad, no parcialmente. El art. 17 (o 21, según la versión del texto) indica que toda referencia a la Ley 19.223 debe entenderse hecha a la nueva ley.'},
+  {q:'¿Cuántos artículos permanentes tiene la Ley 21.459 y en cuántos Títulos se organiza?',opts:['12 artículos en 2 Títulos','16 artículos en 2 Títulos','21 artículos permanentes en 3 Títulos','30 artículos en 4 Títulos'],ans:2,tag:'Ley 21.459',exp:'La Ley 21.459 tiene 21 artículos permanentes organizados en 3 Títulos: Título I (delitos y sanciones, arts. 1–10), Título II (procedimiento, arts. 11–14) y Título III (disposiciones finales, arts. 15–21).'},
+  {q:'¿Qué Título de la Ley 21.459 contiene los tipos penales y sanciones?',opts:['Título I (Arts. 1–10)','Título II (Arts. 11–14)','Título III (Arts. 15–21)','Todos los Títulos contienen delitos'],ans:0,tag:'Ley 21.459',exp:'El Título I (Arts. 1–10) de la Ley 21.459 contiene los 8 tipos penales (arts. 1–8), la atenuante especial de cooperación eficaz (art. 9) y las circunstancias agravantes especiales (art. 10).'},
+  {q:'¿Qué delito tipifica el Artículo 1 de la Ley 21.459?',opts:['Acceso ilícito a sistemas','Ataque a la integridad del sistema (interrupción del funcionamiento)','Fraude informático','Interceptación de comunicaciones'],ans:1,tag:'Ley 21.459 · Art. 1',exp:'El Art. 1 tipifica el ataque a la integridad del sistema: obstaculizar o impedir el normal funcionamiento de un sistema informático mediante introducción, transmisión, daño, deterioro, alteración o supresión de datos. Cubre expresamente ataques DDoS.'},
+  {q:'¿Cómo trata el Artículo 2 de la Ley 21.459 el "ánimo de apoderarse" de información, que era requisito en la Ley 19.223?',opts:['Lo elimina completamente de la ley','Lo mantiene como requisito del tipo base, igual que en la Ley 19.223','Lo convierte en una hipótesis agravada dentro del mismo artículo, con pena mayor, pero ya no es requisito del tipo base','Lo traslada al artículo 10 como circunstancia agravante'],ans:2,tag:'Ley 21.459 · Art. 2',exp:'El Art. 2 resuelve el problema del ánimo: el tipo base (acceso ilícito) no requiere ánimo especial. Pero si el autor además tenía ánimo de apoderarse o usar la información, o si divulgó los datos obtenidos, las penas son mayores. El ánimo pasa de requisito a agravante interna del artículo.'},
+  {q:'¿Qué hipótesis especial contempla el Artículo 3 de la Ley 21.459 además de la interceptación de transmisiones?',opts:['La interceptación de llamadas telefónicas análogas','La captura de datos mediante emisiones electromagnéticas (ej: ataques TEMPEST)','El acceso a redes wifi sin contraseña','La instalación de keyloggers en equipos físicos'],ans:1,tag:'Ley 21.459 · Art. 3',exp:'El Art. 3 tiene dos hipótesis: (1) interceptar transmisiones no públicas por medios técnicos, y (2) captar datos mediante emisiones electromagnéticas de sistemas informáticos. Esta segunda hipótesis cubre ataques sofisticados como Van Eck phreaking o TEMPEST.'},
+  {q:'¿Qué requisito de resultado adicional exige el Artículo 4 de la Ley 21.459 que no existía en el Art. 3 de la Ley 19.223?',opts:['Que el ataque sea transfronterizo','Que se use malware certificado','Que el ataque cause un daño grave al titular de los datos','Que el sistema atacado sea de carácter público'],ans:2,tag:'Ley 21.459 · Art. 4',exp:'El Art. 4 de la Ley 21.459 exige que la alteración, daño o supresión de datos cause un DAÑO GRAVE al titular. El Art. 3 de la Ley 19.223 no tenía este requisito: cualquier alteración maliciosa era suficiente. Este nuevo requisito puede dificultar la persecución de daños menores.'},
+  {q:'¿Qué agravante especial contempla el Artículo 5 de la Ley 21.459 dentro del delito de falsificación informática?',opts:['Si la falsificación afecta a más de 100 personas','Si el delito es cometido por un empleado público abusando de su cargo','Si se usan herramientas de inteligencia artificial','Si el daño económico supera las 400 UTM'],ans:1,tag:'Ley 21.459 · Art. 5',exp:'El Art. 5 contempla una agravante interna: si la falsificación informática es cometida por un empleado público abusando de su oficio, la pena sube de presidio menor grado máximo a presidio mayor en su grado mínimo. Es la pena más alta para un delito informático en la ley.'},
+  {q:'¿De qué delitos provienen los datos para configurar el delito de receptación del Artículo 6 de la Ley 21.459?',opts:['De cualquier delito de la ley (arts. 1–8)','Solo del acceso ilícito (art. 2)','De los delitos de los artículos 2 (acceso ilícito), 3 (interceptación) y 5 (falsificación)','De los delitos de los artículos 1, 4 y 7'],ans:2,tag:'Ley 21.459 · Art. 6',exp:'El Art. 6 solo cubre datos provenientes de los delitos de los arts. 2 (acceso ilícito), 3 (interceptación ilícita) y 5 (falsificación informática). No abarca datos de todos los delitos de la ley, lo que es una limitación importante del tipo penal.'},
+  {q:'¿Cómo se escalonan las penas del Artículo 7 de la Ley 21.459 sobre fraude informático?',opts:['Se aplica una pena única independiente del monto','Se escalonan según la gravedad del método usado','Se escalonan según el monto del perjuicio causado (umbrales en 4, 40 y 400 UTM)','Dependen del número de víctimas del fraude'],ans:2,tag:'Ley 21.459 · Art. 7',exp:'El Art. 7 escala la pena según el monto del perjuicio: hasta 4 UTM (pena mínima), entre 4 y 40 UTM (media), entre 40 y 400 UTM (mayor), y sobre 400 UTM (máxima con multa de 21–30 UTM). Este sistema busca proporcionalidad entre la sanción y el daño económico causado.'},
+  {q:'¿A qué otros delitos fuera de la Ley 21.459 hace referencia el Artículo 8 sobre abuso de dispositivos?',opts:['A la Ley de Propiedad Intelectual','Al artículo 7° de la Ley 20.009 sobre uso fraudulento de tarjetas de crédito','A la Ley de Datos Personales (Ley 19.628)','Al Código de Comercio'],ans:1,tag:'Ley 21.459 · Art. 8',exp:'El Art. 8 sanciona proporcionar herramientas para cometer delitos de los arts. 1–4 de la Ley 21.459 pero TAMBIÉN para las conductas del art. 7° de la Ley 20.009, que regula el uso fraudulento de tarjetas de crédito, débito y similares. Esto amplía el alcance del abuso de dispositivos.'},
+  {q:'¿Qué es la "cooperación eficaz" del Artículo 9 de la Ley 21.459 y cuál es su efecto?',opts:['Es la cooperación de empresas privadas con el Estado; exime de pena','Es el suministro de datos precisos, verídicos y comprobables que contribuyan a esclarecer hechos o identificar responsables; rebaja la pena hasta en un grado','Es la entrega de información al imputado sobre el juicio; suspende el proceso','Es la cooperación internacional entre fiscalías; duplica las penas'],ans:1,tag:'Ley 21.459 · Art. 9',exp:'La cooperación eficaz es el suministro de datos precisos, verídicos y comprobables que ayuden a esclarecer los hechos, identificar responsables o prevenir nuevos delitos. Su efecto es una rebaja de hasta un grado en la pena. El Ministerio Público debe hacer constar la cooperación eficaz en el escrito de formalización.'},
+  {q:'¿Cuáles son las tres circunstancias agravantes especiales del Artículo 10 de la Ley 21.459?',opts:['Reincidencia, uso de herramientas sofisticadas, y ataque transfronterizo','Abuso de posición de confianza en el sistema; abuso de vulnerabilidad de niños/adolescentes/adultos mayores; y afectación de servicios de utilidad pública o procesos electorales','Daño económico grave, pluralidad de víctimas, y uso de malware avanzado','Comisión en grupo organizado, uso de identidad falsa, y ataque nocturno'],ans:1,tag:'Ley 21.459 · Art. 10',exp:'El Art. 10 establece 3 agravantes especiales: (1) abuso de posición de confianza en la administración del sistema; (2) abuso de la vulnerabilidad, confianza o desconocimiento de niños, adolescentes o adultos mayores; (3) afectación de servicios de utilidad pública (electricidad, gas, agua, telecomunicaciones, financieros) o procesos electorales. Todas aumentan la pena en un grado.'},
+  {q:'¿Quiénes pueden presentar querella especialmente según el Artículo 11 de la Ley 21.459?',opts:['Solo el Ministerio Público y las víctimas directas','Cualquier ciudadano y organizaciones de la sociedad civil','El Ministro del Interior, Delegados presidenciales regionales y Delegados presidenciales provinciales, cuando se interrumpa un servicio de utilidad pública','Solo empresas afectadas con pérdidas superiores a 1.000 UTM'],ans:2,tag:'Ley 21.459 · Art. 11',exp:'El Art. 11 amplía la legitimación activa para querella: además de las reglas generales del CPP, pueden querellarse el Ministro del Interior, los Delegados presidenciales regionales y provinciales. La condición es que las conductas hayan interrumpido el normal funcionamiento de un servicio de utilidad pública.'},
+  {q:'¿Qué son los "agentes encubiertos digitales" del Artículo 12 de la Ley 21.459?',opts:['Programas de inteligencia artificial que infiltran redes criminales','Funcionarios policiales que actúan bajo identidad supuesta en canales cerrados de comunicación digital, con autorización judicial','Hackers éticos contratados por el Estado para infiltrar organizaciones criminales','Periodistas encubiertos que investigan ciberdelitos'],ans:1,tag:'Ley 21.459 · Art. 12',exp:'Los agentes encubiertos digitales son funcionarios policiales que actúan bajo identidad supuesta en comunicaciones mantenidas en canales cerrados de comunicación (foros del dark web, grupos cifrados, etc.), con el fin de esclarecer hechos delictivos, identificar responsables, impedirlos o comprobarlos. Requieren autorización del juez de garantía.'},
+  {q:'¿Qué ocurre según el Artículo 13 cuando no es posible incautar físicamente los instrumentos del delito?',opts:['Se prescinde del comiso completamente','Se aplica comiso a una suma de dinero equivalente al valor de los instrumentos','Se aplica una multa adicional de 100 UTM','Se ordena la destrucción virtual de los datos relacionados'],ans:1,tag:'Ley 21.459 · Art. 13',exp:'El Art. 13 establece que cuando no sea posible el decomiso físico de las especies (por ejemplo, si están en otro país o son activos digitales intangibles), se puede aplicar el comiso a una suma de dinero equivalente a su valor respecto de los responsables del delito.'},
+  {q:'¿A quién corresponde dictar los estándares de preservación y custodia de evidencia digital según el Artículo 14?',opts:['Al Ministerio de Justicia mediante decreto','Al Fiscal Nacional del Ministerio Público mediante instrucciones','A cada fiscal regional en su jurisdicción','Al Tribunal Constitucional mediante auto acordado'],ans:1,tag:'Ley 21.459 · Art. 14',exp:'El Art. 14 entrega al Fiscal Nacional la facultad de dictar instrucciones sobre los estándares de preservación y custodia de los antecedentes de investigación en formato electrónico. Esto centraliza los criterios técnicos para garantizar la integridad de la evidencia digital en todo el país.'},
+  {q:'¿Cuáles son las tres definiciones legales contenidas en el Artículo 15 de la Ley 21.459?',opts:['Hacker, cracker y script kiddie','Phishing, ransomware y DDoS','Datos informáticos, sistema informático y prestadores de servicios','Evidencia digital, cadena de custodia y perito forense'],ans:2,tag:'Ley 21.459 · Art. 15',exp:'El Art. 15 define: (a) datos informáticos: representación de hechos, información o conceptos en cualquier forma que se preste a tratamiento informático, incluidos los programas; (b) sistema informático: dispositivo o conjunto de dispositivos para tratamiento automatizado de datos; (c) prestadores de servicios: entidades que permitan comunicar a través de sistemas informáticos o que procesen/almacenen datos para ello.'},
+  {q:'¿Qué establece el Artículo 16 de la Ley 21.459 sobre las personas jurídicas?',opts:['Las exime de responsabilidad penal por actos de sus empleados','Las obliga a contratar seguros contra ciberdelitos','Los delitos de la Ley 21.459 pueden generar responsabilidad penal de personas jurídicas conforme a la Ley 20.393','Les impone un deber de reportar ciberataques al CSIRT de gobierno'],ans:2,tag:'Ley 21.459 · Art. 16',exp:'El Art. 16 establece que las conductas tipificadas en la Ley 21.459 pueden generar responsabilidad penal de las personas jurídicas conforme a la Ley 20.393 (que regula este tipo de responsabilidad en Chile). Las empresas, no solo sus directivos, pueden ser penalmente responsables por ciberdelitos.'},
+  {q:'¿Qué importa el artículo 18 de la Ley 21.459 al Código Procesal Penal?',opts:['Un nuevo recurso de apelación para delitos informáticos','El art. 218 bis sobre cooperación de prestadores de servicios en la entrega de datos y reglas de preservación urgente','La creación de juzgados especiales de cibercrimen','El procedimiento abreviado obligatorio para delitos informáticos menores'],ans:1,tag:'Ley 21.459 · Art. 18',exp:'El Art. 18 modifica el Código Procesal Penal, incorporando el nuevo art. 218 bis que regula la obligación de los prestadores de servicios de cooperar en la entrega de datos informáticos necesarios para investigaciones, y las reglas de preservación urgente de evidencia digital.'},
+  {q:'¿Cuál es la diferencia entre el Art. 1 (ataque al sistema) y el Art. 4 (ataque a los datos) de la Ley 21.459?',opts:['No hay diferencia, son el mismo delito con distinto nombre','El art. 1 protege el sistema como servicio operativo; el art. 4 protege la integridad de los datos almacenados. Un DDoS cae en el art. 1 sin dañar datos; un borrado cae en el art. 4 sin afectar el funcionamiento','El art. 1 es solo para ataques externos; el art. 4 es solo para insiders','El art. 4 tiene pena mayor que el art. 1 en todos los casos'],ans:1,tag:'Ley 21.459',exp:'El Art. 1 protege la disponibilidad del sistema como servicio: su objetivo es el funcionamiento del sistema (DDoS, malware que paraliza operaciones). El Art. 4 protege la integridad de los datos almacenados (borrado, alteración, supresión). Son bienes jurídicos distintos y un mismo ataque puede configurar ambos o solo uno.'},
+  {q:'¿Cuál es la pena más alta contemplada en la Ley 21.459 y en qué artículo se encuentra?',opts:['Presidio mayor en su grado mínimo — Art. 5 cuando es cometido por empleado público','Presidio mayor en su grado máximo — Art. 7 fraude informático sobre 400 UTM','Presidio perpetuo — Art. 1 si afecta infraestructura crítica nacional','Presidio menor máximo — Art. 8 abuso de dispositivos con reincidencia'],ans:0,tag:'Ley 21.459',exp:'La pena más alta de la Ley 21.459 es presidio mayor en su grado mínimo, que se aplica en el Art. 5 (falsificación informática) cuando el delito es cometido por un empleado público abusando de su oficio. Esto supera incluso la pena máxima del fraude informático del Art. 7.'},
+  {q:'¿Por qué el Art. 1 de la Ley 21.459 cubre los ataques DDoS que no cubría la Ley 19.223?',opts:['Porque la Ley 21.459 menciona expresamente la palabra "DDoS" en su texto','Porque sanciona obstaculizar o impedir el funcionamiento del sistema "a través de la transmisión de datos informáticos", que es exactamente cómo funciona un DDoS','Porque los DDoS son un invento posterior a 2022','Porque el art. 1 tiene penas más altas que cualquier artículo de la Ley 19.223'],ans:1,tag:'Comparativa',exp:'El Art. 1 de la Ley 21.459 sanciona obstaculizar el funcionamiento del sistema "a través de la introducción, transmisión, daño, deterioro, alteración o supresión de datos informáticos". La palabra "transmisión" abarca enviar datos masivamente para colapsar el sistema (DDoS). La Ley 19.223 no tenía esta conducta contemplada.'},
+  {q:'¿Qué organismo internacional establece el estándar al que se alinea la Ley 21.459?',opts:['ONU — Oficina de Drogas y Crimen (UNODC)','Interpol — Unidad de Cibercrimen','Consejo de Europa — Convenio de Budapest sobre Ciberdelincuencia (2001)','OTAN — Centro de Excelencia en Ciberdefensa'],ans:2,tag:'Contexto',exp:'La Ley 21.459 se alinea al Convenio de Budapest sobre Ciberdelincuencia del Consejo de Europa (2001), que es el primer y más influyente tratado internacional en materia de cibercrimen. Chile adoptó sus tipos penales, definiciones y mecanismos de cooperación como base de la nueva legislación.'},
+  {q:'¿Cuál fue el evento que más aceleró la tramitación de la Ley 21.459 en Chile?',opts:['El hackeo al sistema del Registro Civil en 2020','El ciberataque al Banco de Chile en mayo de 2018, con robo de más de 10 millones de dólares vía SWIFT','El ataque de ransomware al Ministerio de Salud durante la pandemia','La filtración de datos del padrón electoral en 2019'],ans:1,tag:'Historia',exp:'El ciberataque al Banco de Chile en mayo de 2018 fue el caso más emblemático. Ciberdelincuentes inutilizaron miles de computadores con malware para distraer la atención mientras transferían más de 10 millones de dólares al extranjero vía SWIFT. Expuso las limitaciones de la Ley 19.223 y aceleró el proceso legislativo.'},
+];
+
+let qIdx=0,score=0,answered=false,shuffled=[];
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+function initQuiz(){
+  qIdx=0;score=0;answered=false;
+  shuffled=shuffle(questions);
+  document.getElementById('quiz-main').style.display='block';
+  document.getElementById('quiz-end').style.display='none';
+  renderQ();
+}
+
+function renderQ(){
+  const q=shuffled[qIdx];
+  document.getElementById('q-question').textContent=q.q;
+  document.getElementById('q-tag').textContent=q.tag;
+  document.getElementById('q-dot').style.background=q.tag.includes('21')||q.tag.includes('Comparativa')||q.tag.includes('Historia')||q.tag.includes('Contexto')?'#00D9A3':'#6C63FF';
+  document.getElementById('q-counter').textContent=(qIdx+1)+' / '+shuffled.length;
+  document.getElementById('q-progress').style.width=((qIdx/shuffled.length)*100)+'%';
+  document.getElementById('q-score-live').textContent='Correctas: '+score;
+  document.getElementById('q-next').style.display='none';
+  document.getElementById('q-feedback').className='feedback';
+  answered=false;
+  const opts=document.getElementById('q-options');
+  opts.innerHTML='';
+  q.opts.forEach((o,i)=>{
+    const btn=document.createElement('button');
+    btn.className='option';btn.textContent=o;
+    btn.onclick=()=>selectOpt(i);
+    opts.appendChild(btn);
+  });
+}
+
+function selectOpt(i){
+  if(answered)return;
+  answered=true;
+  const q=shuffled[qIdx];
+  const btns=document.querySelectorAll('.option');
+  btns.forEach(b=>b.disabled=true);
+  const fb=document.getElementById('q-feedback');
+  if(i===q.ans){score++;btns[i].classList.add('correct');fb.textContent='✓ Correcto — '+q.exp;fb.className='feedback ok show';}
+  else{btns[i].classList.add('wrong');btns[q.ans].classList.add('correct');fb.textContent='✗ Incorrecto — '+q.exp;fb.className='feedback ko show';}
+  document.getElementById('q-score-live').textContent='Correctas: '+score;
+  const nb=document.getElementById('q-next');
+  nb.style.display='block';
+  nb.textContent=qIdx<shuffled.length-1?'Siguiente →':'Ver resultado';
+}
+
+function nextQ(){qIdx++;if(qIdx>=shuffled.length)showEnd();else renderQ();}
+
+function showEnd(){
+  document.getElementById('quiz-main').style.display='none';
+  document.getElementById('quiz-end').style.display='block';
+  document.getElementById('end-score').textContent=score+' / '+shuffled.length;
+  const pct=score/shuffled.length;
+  document.getElementById('end-msg').textContent=pct>=0.9?'¡Dominio excelente! Listo para el examen.':pct>=0.7?'Buen manejo. Repasa los artículos más débiles.':pct>=0.5?'Vas bien, revisa los artículos en detalle.':'Repasa tarjetas y artículos antes de volver a intentarlo.';
+  document.getElementById('end-score').style.color=pct>=0.7?'#00D9A3':pct>=0.5?'#facc15':'#FF6B6B';
+}
+
+function restartQuiz(){initQuiz();}
+initQuiz();
+</script>
+</body>
+</html>
